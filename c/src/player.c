@@ -4,11 +4,15 @@ Player *playerSetUp() {
   Player *newPlayer;
   newPlayer = malloc(sizeof(Player));
   newPlayer->position = malloc(sizeof(Position));
+  
   newPlayer->position->x = 14;
-  newPlayer->position->y = 14;
-
+  newPlayer->position->y = 14; 
+ 
   newPlayer->attack = 1;
   newPlayer->health = 20;
+  newPlayer->maxHealth = 20;
+  newPlayer->gold = 0;
+  newPlayer->exp = 0;
 
   mvprintw(newPlayer->position->y, newPlayer->position->x, "@");
   move(newPlayer->position->y, newPlayer->position->x);

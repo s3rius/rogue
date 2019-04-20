@@ -7,6 +7,7 @@ int combat(Player *player, Monster *monster, int order){
       player->health -= monster->attack;
     }else{
       killMonster(monster);
+      player->exp++;
     }
   }else{
     player->health -= monster->attack;

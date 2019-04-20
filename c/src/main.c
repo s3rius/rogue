@@ -10,8 +10,9 @@ int main() {
   Level *level;
   
   level = createLevel(1);
-
+  printGameHUD(level);
   while ((ch = getch()) != 'q') {
+    printGameHUD(level);
     position = handleInput(ch, level->user);
     checkPosition(position, level);
     moveMonsters(level);
@@ -20,13 +21,5 @@ int main() {
 
   endwin();
   return 0;
-}
-
-int screen_setup() {
-  initscr();
-  noecho();
-  refresh();
-
-  return 1;
 }
 
