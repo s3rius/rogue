@@ -14,10 +14,16 @@ Player *playerSetUp() {
   newPlayer->gold = 0;
   newPlayer->exp = 0;
 
-  mvprintw(newPlayer->position->y, newPlayer->position->x, "@");
-  move(newPlayer->position->y, newPlayer->position->x);
-
   return newPlayer;
+}
+
+int placePlayer(Room **rooms, Player *user){
+  user->position->x = rooms[3]->position.x + 1;
+  user->position->y = rooms[3]->position.y + 1;
+
+  mvprintw(user->position->y, user->position->x, "@");
+  move(user->position->y, user->position->x);
+  return 1;
 }
 
 Position *handleInput(int input, Player *user) {

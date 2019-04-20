@@ -59,11 +59,13 @@ int printGameHUD(Level *level);
 /* Functions for map setup */
 Room **roomsSetUp();
 
+int placePlayer(Room **rooms, Player *user);
+
 char **saveLevelPositions();
 
 Level *createLevel(int level);
 
-Room *createRoom(int y, int x, int height, int width);
+Room *createRoom(int grid);
 
 int drawRoom(Room *room);
 
