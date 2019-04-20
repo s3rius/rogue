@@ -7,7 +7,8 @@ Player *playerSetUp() {
   newPlayer->position->x = 14;
   newPlayer->position->y = 14;
 
-  newPlayer->health = 100;
+  newPlayer->attack = 1;
+  newPlayer->health = 20;
 
   mvprintw(newPlayer->position->y, newPlayer->position->x, "@");
   move(newPlayer->position->y, newPlayer->position->x);
@@ -68,16 +69,20 @@ int playerMove(Position *position, Player *user, char **level) {
   return 0;
 }
 
-int checkPosition(Position *position, Player *user, char **level) {
+int checkPosition(Position *position, Level *level) {
   // int space;
   switch (mvinch(position->y, position->x)) {
   case '.':
   case '#':
   case '+':
-    playerMove(position, user, level);
+    playerMove(position, level->user, level->tiles);
     break;
+  case 'S':
+  case 'G':
+  case 'T':
+    combat(level->user, getMonsterAt(position, level->monsters), 1);
   default:
-    move(user->position->y, user->position->x);
+    move(level->user->position->y, level->user->position->x);
     break;
   }
 

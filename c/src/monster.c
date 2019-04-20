@@ -97,13 +97,16 @@ Monster *createMonster(char tile, int health, int attack, int speed,
   newMonster->defence = defence;
   newMonster->pathfinding = pathfinding;
   newMonster->position = malloc(sizeof(Position));
-
+  newMonster->alive = 1;
   sprintf(newMonster->str, "%c", tile);
   return newMonster;
 }
 
 int moveMonsters(Level *level) {
   for (int i = 0; i < level->numberOfMonsters; i++) {
+    if (level->monsters[i]->alive == 0){
+      continue;
+    }
     mvprintw(level->monsters[i]->position->y, level->monsters[i]->position->x,
              ".");
     if (level->monsters[i]->pathfinding == 1) {
@@ -166,3 +169,21 @@ int pathFindingRandom(Position *position) {
 
   return 1;
 }
+
+Monster *getMonsterAt(Position *position, Monster **monsters) {
+  for (int i = 0; i < 6; i++) {
+    if ((position->y == monsters[i]->position->y) &&
+        (position->x == monsters[i]->position->x)) {
+      return monsters[i];
+    }
+  }
+
+  return NULL;
+}
+
+int killMonster(Monster *monster) {
+  mvprintw(monster->position->y, monster->position->x, ".");
+  monster->alive = 0;
+  return 1;
+}
+
