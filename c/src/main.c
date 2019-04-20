@@ -2,7 +2,6 @@
 
 int main() {
 
-  Player *user;
   int ch;
   screen_setup();
   Position *position;
@@ -12,11 +11,11 @@ int main() {
   
   level = createLevel(1);
 
-  user = playerSetUp();
-
   while ((ch = getch()) != 'q') {
-    position = handleInput(ch, user);
-    checkPosition(position, user, level->tiles);
+    position = handleInput(ch, level->user);
+    checkPosition(position, level->user, level->tiles);
+    moveMonsters(level);
+    move(level->user->position->y, level->user->position->x);
   }
 
   endwin();
