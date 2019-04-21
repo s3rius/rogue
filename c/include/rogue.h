@@ -1,6 +1,5 @@
 #ifndef ROGUE_H
 #define ROGUE_H
-#endif
 
 #include <ncurses.h>
 #include <stdlib.h>
@@ -14,7 +13,6 @@ typedef struct Level {
   struct Player *user;
   struct Room **rooms;
   struct Monster **monsters;
-
 } Level;
 
 typedef struct Position {
@@ -26,10 +24,16 @@ typedef struct Room {
   Position position;
   int height;
   int width;
-  Position doors[4];
+  int numberOfDoors;
+  struct Door **doors;
   // Monster ** monsters;
   // Item ** items;
 } Room;
+
+typedef struct Door {
+  Position position;
+  int connected;
+} Door;
 
 typedef struct Player {
   Position *position;
@@ -51,13 +55,18 @@ typedef struct Monster {
   int pathfinding;
   Position *position;
 } Monster;
+/*    GLOBALS   */
 
+int MAX_HEIGHT;
+int MAX_WIDTH;
+
+/* Screen functions */
 int screen_setup();
 
 int printGameHUD(Level *level);
 
 /* Functions for map setup */
-Room **roomsSetUp();
+Room **roomsSetUp(Level *level);
 
 int placePlayer(Room **rooms, Player *user);
 
@@ -65,11 +74,11 @@ char **saveLevelPositions();
 
 Level *createLevel(int level);
 
-Room *createRoom(int grid);
+Room *createRoom(int grid, int numberOfDoors);
 
 int drawRoom(Room *room);
 
-int connectDoors(Position *doorOne, Position *doorTwo);
+void connectDoors(Level *level);
 
 /* Functions for player */
 Player *playerSetUp();
@@ -102,3 +111,5 @@ Monster *getMonsterAt(Position *position, Monster **monsters);
 int combat(Player *player, Monster *monster, int order);
 
 int killMonster(Monster *monster);
+
+#endif

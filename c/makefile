@@ -1,13 +1,15 @@
-CC = gcc
-CFLAGS=-Wall -Werror -g -lncurses -I$(IDIR)
+CC = clang
+CFLAGS=-Wall -g -lmenu -lncurses -I$(IDIR)
 SRCDIR = ./src/
 IDIR = ./include/
 
-SOURCES = $(SRCDIR)*.c
+SOURCES = $(SRCDIR)*.c \
+		  $(SRCDIR)utils/*.c \
+		  $(SRCDIR)windows/*.c
 
-all: clean rogue run
+all: clean rogue
 
-rogue: 
+rogue: $(SOURCES)
 	$(CC) $(SOURCES) $(CFLAGS) -o $@
 
 run:

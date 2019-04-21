@@ -25,7 +25,7 @@ int setStartPosition(Monster *monster, Room *room) {
 }
 
 Monster *selectMonster(int level) {
-  int monster;
+  int monster = 0;
   switch (level) {
   case 1:
   case 2:
@@ -39,6 +39,9 @@ Monster *selectMonster(int level) {
   case 6:
     monster = 3;
     break;
+  default:
+    monster = (rand() % 3) + 1;
+    break;
   }
 
   // mvprintw(0,0, "Monster: %d", monster);
@@ -46,13 +49,10 @@ Monster *selectMonster(int level) {
   switch (monster) {
   case 1:
     return createMonster('S', 2, 1, 1, 1, 1);
-    break;
   case 2:
-    return createMonster('G', 5, 3, 1, 1, 2);
-    break;
+    return createMonster('G', 5, 2, 1, 1, 2);
   case 3:
-    return createMonster('T', 15, 5, 1, 1, 1);
-    break;
+    return createMonster('T', 15, 4, 1, 1, 1);
   default:
     return createMonster('S', 2, 1, 1, 1, 1);
   }

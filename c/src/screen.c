@@ -2,7 +2,10 @@
 
 
 int screen_setup() {
+  MAX_HEIGHT = 25;
+  MAX_WIDTH = 100;
   initscr();
+  keypad(stdscr, TRUE);
   noecho();
   refresh();
   
