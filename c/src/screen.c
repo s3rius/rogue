@@ -1,3 +1,4 @@
+#include <level.h>
 #include "rogue.h"
 
 
@@ -12,7 +13,7 @@ int screen_setup() {
   return 1;
 }
 
-int printGameHUD(Level *level)
+int renderGameHUD(Level *level)
 {
   mvprintw(25, 0, "    Level: %d", level->level);
   printw("    Gold: %d", level->user->gold);

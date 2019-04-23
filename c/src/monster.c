@@ -1,4 +1,8 @@
+#include <monster.h>
+#include "level.h"
+#include "utils.h"
 #include "rogue.h"
+#include "combat.h"
 
 int addMonsters(Level *level) {
   int x;
@@ -58,33 +62,6 @@ Monster *selectMonster(int level) {
   }
 }
 
-/*
- * Spider:
- *  tile: S
- *  attack: 1
- *  speed: 1
- *  levels: 1-3;
- *  health: 2
- *  defence: 1
- *  pathfinding: 1 (random movement)
- *
- * Goblin:
- *  tile: G
- *  attack: 3
- *  speed: 1
- *  levels: 1-6
- *  health: 5
- *  defence: 1
- *  pathfinding: 2 (seeking)
- *
- * Troll:
- *  tile: T
- *  attack: 5
- *  health: 15
- *  speed: 1
- *  defence: 1
- *  pathfinding: 1 (random movement)
- */
 
 Monster *createMonster(char tile, int health, int attack, int speed,
                        int defence, int pathfinding) {
@@ -107,15 +84,11 @@ int moveMonsters(Level *level) {
     if (level->monsters[i]->alive == 0){
       continue;
     }
-    mvprintw(level->monsters[i]->position->y, level->monsters[i]->position->x,
-             ".");
     if (level->monsters[i]->pathfinding == 1) {
       pathFindingRandom(level->monsters[i]->position);
     } else {
       pathfindingSeek(level->monsters[i]->position, level->user->position);
     }
-    mvprintw(level->monsters[i]->position->y, level->monsters[i]->position->x,
-             level->monsters[i]->str);
   }
   return 1;
 }
@@ -182,8 +155,13 @@ Monster *getMonsterAt(Position *position, Monster **monsters) {
 }
 
 int killMonster(Monster *monster) {
-  mvprintw(monster->position->y, monster->position->x, ".");
   monster->alive = 0;
   return 1;
+}
+
+void drawMonster(Monster *monster){
+  if (monster->alive) {
+    mvprintw(monster->position->y, monster->position->x, monster->str);
+  }
 }
 

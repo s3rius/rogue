@@ -7,7 +7,7 @@ void addPositionYX(int ** frontier, int frontierCount, int y, int x)
     frontier[frontierCount][1] = x;
 }
 
-int checkTile(y, x){
+int checkTile(int y, int x){
   char a = (char)mvinch(y, x);
   if (a == ' ' || a == '+'){
     return 1;

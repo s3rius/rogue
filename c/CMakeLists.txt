@@ -8,11 +8,6 @@ file(GLOB SOURCES
         ./src/windows/*.c
         )
 
-#file(GLOB c-rogue_SRC
-#        "/src/*.c"
-#        "/include/*.h"
-#        )
-
 add_executable(c-rogue ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME} ncurses)
+target_link_libraries(${PROJECT_NAME} menu ncurses)

@@ -1,4 +1,7 @@
+#include "player.h"
+#include "monster.h"
 #include "rogue.h"
+#include "combat.h"
 
 int combat(Player *player, Monster *monster, int order){
   if (order == 1){

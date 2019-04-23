@@ -1,3 +1,5 @@
+#include <monster.h>
+#include "level.h"
 #include "rogue.h"
 #include "utils.h"
 // typedef struct Level{
@@ -88,4 +90,18 @@ char **saveLevelPositions() {
     }
   }
   return positions;
+}
+
+void drawLevel(Level *level){
+  int x, y, i;
+  for (y = 0; y < MAX_HEIGHT; y++) {
+    for (x = 0; x < MAX_WIDTH; x++) {
+      mvaddch(y,x , level->tiles[y][x]);
+    }
+  }
+
+  for (i = 0; i < level->numberOfMonsters; ++i) {
+      drawMonster(level->monsters[i]);
+  }
+  drawPlayer(level->user);
 }

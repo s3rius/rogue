@@ -1,3 +1,4 @@
+#include <room.h>
 #include "rogue.h"
 
 int drawRoom(Room *room) {

@@ -1,43 +1,50 @@
 #include <mainMenu.h>
+#include <game.h>
+#include <level.h>
 #include "rogue.h"
 
-int gameLoop() {
-  Position *position;
-  Level *level;
 
-  level = createLevel(1);
-  printGameHUD(level);
-  int ch;
-  while ((ch = getch()) != 'q') {
-    printGameHUD(level);
-    position = handleInput(ch, level->user);
-    checkPosition(position, level);
-    moveMonsters(level);
-    move(level->user->position->y, level->user->position->x);
-    if (level->user->health < 1) {
-      return -1;
-    }
-  }
-  return 1;
-}
 
 void menuLoop() {
   int choise;
+  Game game;
+  game.initialized = 0;
+  game.reachedLeavel = 1;
+
   char *menuChoices[] = {"Start game", "Settings", "Quit"};
+  int numberOfMenuItems = 3;
+  int isPasuse = 0;
   while (true) {
-    choise = mainMenu(3, menuChoices);
+    choise = mainMenu(numberOfMenuItems, menuChoices);
     switch (choise) {
       case START_GAME:
-        if (gameLoop() == -1) {
+        if (gameLoop(&game) == -1) {
 //          TODO: DeathScreen
 //          show_death_screen();
+        }else{
+          menuChoices[0] = "Resume game";
+          menuChoices[1] = "Reset game";
+          menuChoices[2] = "Go to main menu";
+          isPasuse = 1;
         }
         clear();
         break;
       case SETTINGS:
+        if (isPasuse){
+          menuChoices[0] = "Start game";
+          game.initialized = 0;
+        }
         break;
       case QUIT:
-        return;
+        if (isPasuse){
+          game.initialized = 0;
+          isPasuse = 0;
+          menuChoices[0] = "Start game";
+          menuChoices[1] = "Settings";
+          menuChoices[2] = "Quit";
+        }else {
+          return;
+        }
     }
   }
 }
