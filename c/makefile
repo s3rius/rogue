@@ -5,7 +5,9 @@ IDIR = ./include/
 
 SOURCES = $(SRCDIR)*.c \
 		  $(SRCDIR)utils/*.c \
-		  $(SRCDIR)windows/*.c
+		  $(SRCDIR)windows/*.c \
+		  $(SRCDIR)entities/*c \
+		  $(SRCDIR)entities/items/*.c
 
 all: clean rogue
 

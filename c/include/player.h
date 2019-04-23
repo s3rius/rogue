@@ -1,10 +1,14 @@
 #pragma once
 #include "position.h"
+#include "item.h"
 
 typedef struct Player {
-    Position *position;
+    int inventorySize;
+    int numberOfItems;
     int health;
+    Position *position;
     int attack;
+    Item **items;
     int maxHealth;
     int gold;
     int exp;

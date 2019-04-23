@@ -41,7 +41,7 @@ int moveMonsters(Level *level);
 
 int screen_setup();
 
-int renderGameHUD(Level *level);
+void renderGameHUD(Level *level);
 
 int pathfindingSeek(Position *start, Position *dst);
 

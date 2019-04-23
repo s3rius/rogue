@@ -4,19 +4,24 @@
 #include "rogue.h"
 
 Player *playerSetUp() {
+  int inventorySize = 25;
   Player *newPlayer;
   newPlayer = malloc(sizeof(Player));
   newPlayer->position = malloc(sizeof(Position));
-  
+  newPlayer->items = malloc(sizeof(Item *));
   newPlayer->position->x = 14;
-  newPlayer->position->y = 14; 
- 
+  newPlayer->position->y = 14;
+
   newPlayer->attack = 1;
   newPlayer->health = 20;
   newPlayer->maxHealth = 20;
   newPlayer->gold = 0;
   newPlayer->exp = 0;
+  newPlayer->numberOfItems = 0;
+  newPlayer->inventorySize = inventorySize;
 
+  newPlayer->items[newPlayer->numberOfItems] = createSword(1, 20);
+  newPlayer->numberOfItems++;
   return newPlayer;
 }
 

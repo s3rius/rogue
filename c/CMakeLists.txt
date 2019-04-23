@@ -6,6 +6,8 @@ file(GLOB SOURCES
         ./src/*.c
         ./src/utils/*.c
         ./src/windows/*.c
+        ./src/entities/*.c
+        ./src/entities/items/*.c
         )
 
 add_executable(c-rogue ${SOURCES})

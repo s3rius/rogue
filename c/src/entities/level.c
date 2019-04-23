@@ -2,15 +2,6 @@
 #include "level.h"
 #include "rogue.h"
 #include "utils.h"
-// typedef struct Level{
-// char ** tiles;
-// int level;
-// int numberOfRooms;
-// int numberOfMonsters;
-// struct Room ** rooms;
-// struct Monster ** monsters;
-//
-// } Level;
 
 Level *createLevel(int level) {
   Level *newLevel;
@@ -52,20 +43,11 @@ void connectDoors(Level *level) {
         }
         randRoom = rand() % level->numberOfRooms;
         randDoor = rand() % level->rooms[randRoom]->numberOfDoors;
-        /* 
-         * 01 31
-         * 03 41
-         * 00 20
-         * 00 30
-         * 00 32
-         * 22 00
-         */ 
+
         if (level->rooms[randRoom]->doors[randDoor]->connected == 1 ||
             randRoom == i) {
           continue;
         }
-        // mvprintw(0, 0, "Connecting [%d][%d] to [%d][%d]", i, j, randRoom, randDoor);
-        // getch();
 
         pathFind(&level->rooms[i]->doors[j]->position,
                  &level->rooms[randRoom]->doors[randDoor]->position);
